@@ -50,6 +50,19 @@ GmapsModule.factory('GeocodingService', ['$http','$q', '$window', function($http
 			return deferred.promise;
 		};
 
+		geo.prototype.reverseGeocode = function(latitude,longitude){
+			var deferred = $q.defer();
+			var latlng = new google.maps.LatLng(latitude,longitude);
+			this.geocoder.geocode({'latlng':latlng},function(results,status){
+				if (status = google.maps.GeocoderStatus.OK){
+					deferred.resolve(results);
+				}else{
+					
+				}
+			});
+			return deferred.promise;
+		};
+
 		geo.prototype.reverseGeocode = function(latlng){
 			var deferred = $q.defer();
 			this.geocoder.geocode({'latLng':latlng},function(results,status){
